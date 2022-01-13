@@ -1,5 +1,5 @@
 package rest.cinema.ressources;
 
-public class CinemaRessources {
+public class FilmsRessource {
 
 }
