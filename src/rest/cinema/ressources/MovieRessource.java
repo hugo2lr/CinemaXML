@@ -14,16 +14,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.JAXBElement;
 
-import rest.cinema.dao.FilmDao;
-import rest.cinema.model.Film;
+import rest.cinema.dao.MovieDao;
+import rest.cinema.model.Movie;
 
-public class FilmRessource {
+public class MovieRessource {
 	@Context
     UriInfo uriInfo;
     @Context
     Request request;
     String id;
-    public FilmRessource(UriInfo uriInfo, Request request, String id) {
+    public MovieRessource(UriInfo uriInfo, Request request, String id) {
         this.uriInfo = uriInfo;
         this.request = request;
         this.id = id;
@@ -32,45 +32,45 @@ public class FilmRessource {
     //Application integration
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Film getFilm() {
-        Film film = FilmDao.instance.getModel().get(id);
-        if(film==null)
-            throw new RuntimeException("Get: Film with " + id +  " not found");
-        return film;
+    public Movie getMovie() {
+        Movie movie = MovieDao.instance.getModel().get(id);
+        if(movie==null)
+            throw new RuntimeException("Get: Movie with " + id +  " not found");
+        return movie;
     }
     
  // for the browser
     @GET
     @Produces(MediaType.TEXT_XML)
-    public Film getFilmHTML() {
-        Film film = FilmDao.instance.getModel().get(id);
-        if(film==null)
-            throw new RuntimeException("Get: Film with " + id +  " not found");
-        return film;
+    public Movie getMovieHTML() {
+        Movie movie = MovieDao.instance.getModel().get(id);
+        if(movie==null)
+            throw new RuntimeException("Get: Movie with " + id +  " not found");
+        return movie;
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Response putFilm(JAXBElement<Film> film) {
-        Film c = film.getValue();
+    public Response putMovie(JAXBElement<Movie> movie) {
+        Movie c = movie.getValue();
         return putAndGetResponse(c);
     }
     
     @DELETE
-    public void deleteFilm() {
-        Film c = FilmDao.instance.getModel().remove(id);
+    public void deleteMovie() {
+        Movie c = MovieDao.instance.getModel().remove(id);
         if(c==null)
-            throw new RuntimeException("Delete: Film with " + id +  " not found");
+            throw new RuntimeException("Delete: Movie with " + id +  " not found");
     }
 
-    private Response putAndGetResponse(Film film) {
+    private Response putAndGetResponse(Movie movie) {
         Response res;
-        if(FilmDao.instance.getModel().containsKey(film.getId())) {
+        if(MovieDao.instance.getModel().containsKey(movie.getId())) {
             res = Response.noContent().build();
         } else {
             res = Response.created(uriInfo.getAbsolutePath()).build();
         }
-        FilmDao.instance.getModel().put(film.getId(), film);
+        MovieDao.instance.getModel().put(movie.getId(), movie);
         return res;
     }
 }

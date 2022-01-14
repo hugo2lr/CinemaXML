@@ -1,5 +1,7 @@
 package rest.cinema.model;
 
+import java.util.ArrayList;
+
 public class MovieTheaterOwner {
 
 	private int id;
@@ -15,18 +17,43 @@ public class MovieTheaterOwner {
 		ArrayList<Movie> lm = new ArrayList<>();
 		Movie m = new Movie();
 	}
-	
-	public void addMovie() {
-		lm.add(m);
+
+	public int getId() {
+		return id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public ArrayList<Movie> getLm() {
+		return lm;
+	}
+
+	public Movie getM() {
+		return m;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setLm(ArrayList<Movie> lm) {
+		this.lm = lm;
+	}
+
+	public void setM(Movie m) {
+		this.m = m;
 	}
 	
-	public void deleteMovie() {
-		lm.remove(m);
-	}
 	
-	public Movie readMovie() {
-		for (m : lm) 
-			return Movie m;
-	}
 
 }
